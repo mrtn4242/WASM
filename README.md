@@ -23,3 +23,4 @@
 # Notes
 
 Build outputs are included in the repository for convenience.
+Test environment was Firefox 136.

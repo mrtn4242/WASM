@@ -42,8 +42,8 @@ std::vector<int> get_primes (int max_prime)
     // wait for a bit before computing, so we can verify that 
     // the gui is still active
     std::this_thread::sleep_for(std::chrono::seconds(5));
-    std::vector<int> vec = compute_primes(max_prime);
-    return vec;
+    std::vector<int> primes = compute_primes(max_prime);
+    return primes;
 }
 
 EMSCRIPTEN_BINDINGS(Module)
