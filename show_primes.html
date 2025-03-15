@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>PRIMES!</title>
+    <style>
+      .emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block; }
+      textarea.emscripten { font-family: monospace; width: 80%;}
+
+    </style>
+  </head>
+
+<body>
+    <h1>Primes</h1>
+    
+    <textarea class="emscripten" id="output" rows="27"></textarea>
+    
+    <br/>
+    Press to verify that the gui is still alive, waiting for the primes to be available 
+    <button id="alive-button">I'm alive</button>
+    <textarea class="emscripten" id="alive" rows="1"></textarea>
+    
+    <script async type="text/javascript" src="show_primes.js"></script>
+    <script type='text/javascript'>
+        var outputElement = document.getElementById('output');
+        if (outputElement)
+            outputElement.value = 'clear';
+
+        // create module and call get_primes when it is initialized
+        var Module = {
+            onRuntimeInitialized: async function() {
+                var primes = Module.get_primes(5000);
+                for (var i = 0; i < primes.size(); i++) {
+                    outputElement.value += ', ' + primes.get(i);
+                }
+            }
+        };
+        
+        var aliveElement = document.getElementById('alive');
+        document.getElementById('alive-button').addEventListener('click', () => {
+            aliveElement.value += 'Yes ';
+        });
+    </script>
+    
+</body>
+
+</html>
