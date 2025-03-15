@@ -39,8 +39,8 @@ std::vector<int> compute_primes(int max_prime)
 
 std::vector<int> get_primes (int max_prime)
 {
-    // wait for a bit before computing, so we can verify that 
-    // the gui is still active
+    // Wait for a bit before computing, so we can verify that 
+    // the gui is still active by pressing the button.
     std::this_thread::sleep_for(std::chrono::seconds(5));
     std::vector<int> primes = compute_primes(max_prime);
     return primes;
@@ -51,9 +51,3 @@ EMSCRIPTEN_BINDINGS(Module)
     register_vector<int>("vector<int>");
     function("get_primes", &get_primes);
 }
-
-// ideas:
-// https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#embind
-// https://emscripten.org/docs/porting/pthreads.html
-// https://stackoverflow.com/questions/27473959/thread-using-emscripten
-// https://github.com/emscripten-core/emscripten/issues/17372

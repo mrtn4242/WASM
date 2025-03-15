@@ -25,18 +25,18 @@
     <script type='text/javascript'>
         var outputElement = document.getElementById('output');
         if (outputElement)
-            outputElement.value = 'clear';
+            outputElement.value = '';
 
-        // create module and call get_primes when it is initialized
-        var Module = {
-            onRuntimeInitialized: async function() {
-                var primes = Module.get_primes(5000);
-                for (var i = 0; i < primes.size(); i++) {
-                    outputElement.value += ', ' + primes.get(i);
-                }
+        // worker implementation and interaction inspired by
+        // https://niekdeschipper.com/projects/emscripten.html
+        const worker = new Worker("primes_worker.js")
+        worker.onmessage = (e) => {
+            console.log("Data received");
+            for (var i = 0; i < e.data.length; i++) {
+                outputElement.value += e.data[i] + ', ';
             }
-        };
-        
+        }
+
         var aliveElement = document.getElementById('alive');
         document.getElementById('alive-button').addEventListener('click', () => {
             aliveElement.value += 'Yes ';
