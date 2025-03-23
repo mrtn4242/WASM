@@ -24,3 +24,4 @@
 
 Build outputs are included in the repository for convenience.
 Test environment was Firefox 136.
+The code was built with emsdk v4.0.5.
